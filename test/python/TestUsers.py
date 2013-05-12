@@ -3,17 +3,17 @@ import requests
 import sys
 sys.path.append('../../src/main/python/')
 
-from Accounts import Accounts
+from Users import Users
 from Lh3Test  import Lh3Test
 
-class TestAccounts(Lh3Test):
+class TestUsers(Lh3Test):
 
     def setUp(self):
-        super(TestAccounts, self).setUp()
-        self.accounts = Accounts(self.host, self.username, self.passwd)
+        super(TestUsers, self).setUp()
+        self.users = Users(self.host, self.username, self.passwd)
 
     def test_init(self):
-        accounts = Accounts(self.host, self.username, self.passwd)
+        users = Users(self.host, self.username, self.passwd)
 
     def test_listAccounts(self):
         results, status = self.accounts.listAccounts()
@@ -30,5 +30,3 @@ class TestAccounts(Lh3Test):
 if __name__ == "__main__":
     import unittest
     unittest.main()
-
-    
