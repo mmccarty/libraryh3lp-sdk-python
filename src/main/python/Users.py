@@ -12,3 +12,12 @@ class Users (Resource):
     def showUser(self, uuid):
         r = self.get(url = "/%s" % uuid)
         return r.json(), r.status_code
+
+    def createUser(self, data):
+        r = self.post(data = data)
+        return r.json(), r.status_code
+
+    def deleteUser(self, uuid):
+        r = self.delete(url = "/%s" % uuid)
+        return r.json(), r.status_code
+

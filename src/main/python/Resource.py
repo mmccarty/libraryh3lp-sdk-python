@@ -1,4 +1,5 @@
 import requests
+import json
 
 TIMEOUT = 60
 
@@ -20,15 +21,17 @@ class Resource (object):
                                 timeout = TIMEOUT,
                                 verify = self.ssl_verify)
 
-    def post(self, url = "", params = {}):
+    def post(self, url = "", data = {}):
         return self.session.post(self.host + self.baseurl + url,
-                                 params = params,
-                                timeout = TIMEOUT,
+                                 data    = json.dumps(data),
+                                 headers = {'content-type' : 'application/json'},
+                                 timeout = TIMEOUT,
                                  verify = self.ssl_verify)
 
-    def put(self, url = "", params = {}):
+    def put(self, url = "", data = {}):
         return self.session.put(self.host + self.baseurl + url,
-                                params = params,
+                                data = data,
+                                headers = {'content-type' : 'application/json'},
                                 timeout = TIMEOUT,
                                 verify = self.ssl_verify)
 
