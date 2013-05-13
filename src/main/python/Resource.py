@@ -14,7 +14,8 @@ class Resource (object):
                           verify = self.ssl_verify)
 
     def get(self, url = "", params = {}):
-        return self.session.get(self.host + self.baseurl + url,
+        uri = self.host + self.baseurl + url
+        return self.session.get(uri,
                                 params = params,
                                 timeout = TIMEOUT,
                                 verify = self.ssl_verify)

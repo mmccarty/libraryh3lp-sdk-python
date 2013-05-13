@@ -15,17 +15,19 @@ class TestUsers(Lh3Test):
     def test_init(self):
         users = Users(self.host, self.username, self.passwd)
 
-    def test_listAccounts(self):
-        results, status = self.accounts.listAccounts()
+    def test_listUsers(self):
+        results, status = self.users.listUsers()
         self.assertEqual(status, requests.codes.ok)
-        self.assertEqual(results[0]['email'], 'support@mycustomercloud.com')
-        self.assertEqual(results[0]['signup'], '2010-01-30')
+        self.assertEqual(results[20]['name'], 'pamtest')
+        self.assertEqual(results[20]['type'], 'user')
+        self.assertEqual(results[20]['email'], 'psessoms@gmail.com')
 
-    def test_showAccount(self):
-        results, status = self.accounts.showAccount("3f3eea93-73a4-45b8-a011-52deea0947eb")
+    def test_showUser(self):
+        results, status = self.users.showUser("dd09a03e-d527-4783-b7dd-6fdd8aecef6e")
         self.assertEqual(status, requests.codes.ok)
-        self.assertEqual(results['email'], 'support@mycustomercloud.com')
-        self.assertEqual(results['signup'], '2010-01-30')
+        self.assertEqual(results[0]['type'], 'folder')
+        self.assertEqual(results[24]['name'], 'pamtest')
+        self.assertEqual(results[24]['email'], 'psessoms@gmail.com')
 
 if __name__ == "__main__":
     import unittest
