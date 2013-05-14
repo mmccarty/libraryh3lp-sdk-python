@@ -13,30 +13,16 @@ class Resource (object):
         self.session.post(host + "/2011-12-03/auth/login",
                           params = {'username' : username, 'password' : passwd},
                           verify = self.ssl_verify)
+        self.methodHandlers = {'GET':    self.session.get,
+                               'POST':   self.session.post,
+                               'PUT':    self.session.put,
+                               'DELETE': self.session.delete}
 
-    def get(self, url = "", data = {}):
-        uri = self.host + self.baseurl + url
-        return self.session.get(uri,
-                                data    = json.dumps(data),
-                                timeout = TIMEOUT,
-                                headers = {'content-type' : 'application/json'},
-                                verify  = self.ssl_verify)
-
-    def post(self, url = "", data = {}):
-        return self.session.post(self.host + self.baseurl + url,
-                                 data    = json.dumps(data),
-                                 headers = {'content-type' : 'application/json'},
-                                 timeout = TIMEOUT,
-                                 verify  = self.ssl_verify)
-
-    def put(self, url = "", data = {}):
-        return self.session.put(self.host + self.baseurl + url,
-                                data    = json.dumps(data),
-                                headers = {'content-type' : 'application/json'},
-                                timeout = TIMEOUT,
-                                verify  = self.ssl_verify)
-
-    def delete(self, url = ""):
-        return self.session.delete(self.host + self.baseurl + url,
-                                   timeout = TIMEOUT,
-                                   verify = self.ssl_verify)
+    def jsonRequest(self, method, url = "", data = {}):
+        response = self.methodHandlers[method](self.host + self.baseurl + url,
+                                               data = json.dumps(data),
+                                               timeout = TIMEOUT,
+                                               headers = {'content-type' : 'application/json'},
+                                               verify  = self.ssl_verify)
+                                               
+        return response.json(), response.status_code
