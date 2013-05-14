@@ -29,12 +29,16 @@ class TestUsers(Lh3Test):
         self.assertEqual(results['name'], 'pamtest')
         self.assertEqual(results['email'], 'psessoms@gmail.com')
 
-    def test_createUser(self):
+        results, status = self.users.showUser("dd09a03e-d527-4783-b7dd-6fdd8aecef6e", folder = True)
+        self.assertEqual(status, requests.codes.ok)
+        self.assertEqual(results[0]['type'], 'folder')
+
+    def test_100createUser(self):
         data = {'name' : 'unittest&',
-                  'password' : 'asdf5!',
-                  'type'     : 'user',
-                  'email'    : 'unittest@test.com',
-                  'parent-uuid' : '8fcf1c72-d77b-4fa6-bbe2-5b7834022ed6'
+                'password' : 'asdf5!',
+                'type'     : 'user',
+                'email'    : 'unittest@test.com',
+                'parent-uuid' : '8fcf1c72-d77b-4fa6-bbe2-5b7834022ed6'
                 }
 
         results, status = self.users.createUser(data = data)
@@ -43,9 +47,9 @@ class TestUsers(Lh3Test):
         self.assertEqual(results['success'], 'false')
         
         data = {'name' : 'unittest',
-                  'password' : 'asdf5!',
-                  'type'     : 'user',
-                  'parent-uuid' : '8fcf1c72-d77b-4fa6-bbe2-5b7834022ed6'
+                'password' : 'asdf5!',
+                'type'     : 'user',
+                'parent-uuid' : '8fcf1c72-d77b-4fa6-bbe2-5b7834022ed6'
                 }
         results, status = self.users.createUser(data = data)
 
@@ -53,11 +57,23 @@ class TestUsers(Lh3Test):
         self.assertEqual(results[0]['name'], data['name'])
         self.assertEqual(results[0]['type'], data['type'])
 
-    def test_deleteUser(self):
+    def test_101saveUser(self):
+        data = {'name' : 'unittest',
+                'password' : 'asdf5!',
+                'type'     : 'user',
+                'email'    : 'unittest@test.com',
+                'parent-uuid' : '8fcf1c72-d77b-4fa6-bbe2-5b7834022ed6'
+                }
+
+        results, status = self.users.saveUser("deccfef7-0cdc-4ed1-a827-b3dbd4cc3d88", data = data)
+
+        self.assertEqual(status, requests.codes.ok)
+        self.assertEqual(results[0]['email'], data['email'])
+        
+    def test_102deleteUser(self):
         results, status = self.users.deleteUser("deccfef7-0cdc-4ed1-a827-b3dbd4cc3d88")
         self.assertEqual(status, requests.codes.ok)
         self.assertTrue(results['success'])
-        
         
 if __name__ == "__main__":
     import unittest

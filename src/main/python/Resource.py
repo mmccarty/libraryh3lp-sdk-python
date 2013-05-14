@@ -14,26 +14,27 @@ class Resource (object):
                           params = {'username' : username, 'password' : passwd},
                           verify = self.ssl_verify)
 
-    def get(self, url = "", params = {}):
+    def get(self, url = "", data = {}):
         uri = self.host + self.baseurl + url
         return self.session.get(uri,
-                                params = params,
+                                data    = json.dumps(data),
                                 timeout = TIMEOUT,
-                                verify = self.ssl_verify)
+                                headers = {'content-type' : 'application/json'},
+                                verify  = self.ssl_verify)
 
     def post(self, url = "", data = {}):
         return self.session.post(self.host + self.baseurl + url,
                                  data    = json.dumps(data),
                                  headers = {'content-type' : 'application/json'},
                                  timeout = TIMEOUT,
-                                 verify = self.ssl_verify)
+                                 verify  = self.ssl_verify)
 
     def put(self, url = "", data = {}):
         return self.session.put(self.host + self.baseurl + url,
-                                data = data,
+                                data    = json.dumps(data),
                                 headers = {'content-type' : 'application/json'},
                                 timeout = TIMEOUT,
-                                verify = self.ssl_verify)
+                                verify  = self.ssl_verify)
 
     def delete(self, url = ""):
         return self.session.delete(self.host + self.baseurl + url,
