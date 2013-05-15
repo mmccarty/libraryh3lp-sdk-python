@@ -40,20 +40,15 @@ class TestUsers(Lh3Test):
         data = {'name' : 'unittest&',
                 'password' : 'asdf5!',
                 'type'     : 'user',
-                'email'    : 'unittest@test.com',
-                'parent-uuid' : '8fcf1c72-d77b-4fa6-bbe2-5b7834022ed6'
-                }
+                'parent-uuid' : '8fcf1c72-d77b-4fa6-bbe2-5b7834022ed6'}
 
         results, status = self.users.createUser(data = data)
         self.assertEqual(status, requests.codes.ok)
         self.assertEqual(results['message'], 'User names cannot contain spaces or any of the characters "&\'/:<>@\\.') 
         self.assertEqual(results['success'], 'false')
         
-        data = {'name' : 'unittest',
-                'password' : 'asdf5!',
-                'type'     : 'user',
-                'parent-uuid' : '8fcf1c72-d77b-4fa6-bbe2-5b7834022ed6'
-                }
+        data['name'] = 'unittest'
+
         results, status = self.users.createUser(data = data)
 
         self.assertEqual(status, requests.codes.ok)

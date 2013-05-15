@@ -30,5 +30,3 @@ class TestAccounts(Lh3Test):
 if __name__ == "__main__":
     import unittest
     unittest.main()
-
-    
