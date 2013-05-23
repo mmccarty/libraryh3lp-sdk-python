@@ -17,17 +17,25 @@ class Resource (object):
                                'PUT':    self.session.put,
                                'DELETE': self.session.delete}
 
-    def jsonRequest(self, method, url = "", data = {}):
+    def jsonRequest(self, method, url = "", data = {}, json_response = True):
         response = self.methodHandlers[method](self.host + self.baseurl + url,
                                                data = json.dumps(data),
                                                timeout = self.timeout,
                                                headers = {'content-type' : 'application/json'},
                                                verify  = self.ssl_verify)
                                                
-        return response.json(), response.status_code
+        return (response.json() if json_response else response.text, 200) if response.status_code == 200 else \
+               (response, response.status_code)
+
+    def bodyRequest(self, method, url = "", data = ""):
+        return self.methodHandlers[method](self.host + self.baseurl + url,
+                                           data = data,
+                                           timeout = self.timeout,
+                                           verify  = self.ssl_verify)
 
     def httpRequest(self, method, url = "", params = {}):
         return self.methodHandlers[method](self.host + self.baseurl + url,
                                            params = params,
                                            timeout = self.timeout,
+                                           headers = {'content-type' : 'text/plain'},
                                            verify  = self.ssl_verify)

@@ -27,6 +27,21 @@ class TestAccounts(Lh3Test):
         self.assertEqual(results['email'], 'support@mycustomercloud.com')
         self.assertEqual(results['signup'], '2010-01-30')
 
+    def xtest_updateAccount(self):
+        
+        results, status = self.accounts.updateAccount("3f3eea93-73a4-45b8-a011-52deea0947eb",
+                                                      data = {'email' : 'unittest@nubgames.com'})
+        self.assertEqual(status, requests.codes.ok)
+
+        results, status = self.accounts.showAccount("3f3eea93-73a4-45b8-a011-52deea0947eb")
+        self.assertEqual(status, requests.codes.ok)
+        self.assertEqual(results['email'], 'unittest@nubgames.com')
+        
+        results, status = self.accounts.updateAccount("3f3eea93-73a4-45b8-a011-52deea0947eb",
+                                                      data = {'email' : 'support@mycustomercloud.com'})
+        self.assertEqual(status, requests.codes.ok)
+
+
 if __name__ == "__main__":
     import unittest
     unittest.main()

@@ -10,3 +10,6 @@ class Accounts (Resource):
 
     def showAccount(self, uuid):
         return self.jsonRequest('GET', url = "/%s" % uuid)
+
+    def updateAccount(self, uuid, data = {}):
+        return self.jsonRequest('PUT', url = "/%s" % uuid, data = data)
