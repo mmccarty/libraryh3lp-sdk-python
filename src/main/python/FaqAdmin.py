@@ -26,3 +26,15 @@ class FaqAdmin (Resource):
     def saveAnswer(self, uuid, data = {}):
         results = self.bodyRequest('PUT', url = "/questions/%s/answer" % uuid, data = data)
         return results.text, results.status_code
+
+    def resetLikes(self, uuid):
+        return self.jsonRequest('DELETE', url = "/questions/%s/likes" % uuid)
+
+    def resetDislikes(self, uuid):
+        return self.jsonRequest('DELETE', url = "/questions/%s/dislikes" % uuid)
+
+    def resetViews(self, uuid):
+        return self.jsonRequest('DELETE', url = "/questions/%s/views" % uuid)
+
+    def addQuestionTopic(self, uuid, topic):
+        return self.jsonRequest('POST', url = "/questions/%s/topics" % uuid, data = {'topic' : topic})
