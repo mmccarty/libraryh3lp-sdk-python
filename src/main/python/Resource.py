@@ -1,11 +1,13 @@
 import requests
 import json
 
+VERSION = '/2011-12-03'
+
 class Resource (object):
 
     def __init__(self, host, baseurl, username, passwd, ssl_verify = False, timeout = 60):
         self.host = host
-        self.baseurl    = baseurl
+        self.baseurl    = VERSION + baseurl
         self.ssl_verify = ssl_verify
         self.timeout    = timeout
         self.session    = requests.Session()

@@ -3,7 +3,7 @@ from Resource import Resource
 class Accounts (Resource):
 
     def __init__(self, host, username, passwd):
-        return super(Accounts, self).__init__(host, "/2011-12-03/accounts", username, passwd)
+        return super(Accounts, self).__init__(host, "/accounts", username, passwd)
     
     def listAccounts(self):
         return self.jsonRequest('GET')

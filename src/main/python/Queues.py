@@ -3,7 +3,7 @@ from Resource import Resource
 class Queues (Resource):
 
     def __init__(self, host, username, passwd):
-        return super(Queues, self).__init__(host, "/2011-12-03/queues", username, passwd)
+        return super(Queues, self).__init__(host, "/queues", username, passwd)
 
     def listQueues(self):
         return self.jsonRequest('GET')

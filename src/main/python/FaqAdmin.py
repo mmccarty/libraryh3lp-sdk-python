@@ -3,7 +3,7 @@ from Resource import Resource
 class FaqAdmin (Resource):
 
     def __init__(self, host, username, passwd):
-        return super(FaqAdmin, self).__init__(host, "/2011-12-03/ask", username, passwd)
+        return super(FaqAdmin, self).__init__(host, "/ask", username, passwd)
     
     def listQuestions(self):
         return self.jsonRequest('GET', url = "/questions")
