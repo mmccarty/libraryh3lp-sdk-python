@@ -11,7 +11,7 @@ class Resource (object):
         self.ssl_verify = ssl_verify
         self.timeout    = timeout
         self.session    = requests.Session()
-        self.session.post(host + "/2011-12-03/auth/login",
+        self.session.post(host + VERSION + "/auth/login",
                           params = {'username' : username, 'password' : passwd},
                           verify = self.ssl_verify)
         self.methodHandlers = {'GET':    self.session.get,
