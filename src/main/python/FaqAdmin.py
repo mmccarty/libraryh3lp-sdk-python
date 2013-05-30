@@ -23,7 +23,7 @@ class FaqAdmin (Resource):
     def showAnswer(self, uuid):
         return self.jsonRequest('GET', url = "/questions/%s/answer" % uuid, json_response = False)
 
-    def saveAnswer(self, uuid, data = {}):
+    def saveAnswer(self, uuid, data = ""):
         results = self.bodyRequest('PUT', url = "/questions/%s/answer" % uuid, data = data)
         return results.text, results.status_code
 
