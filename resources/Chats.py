@@ -4,7 +4,7 @@ from datetime import datetime
 class Chats (Resource):
 
     def __init__(self, host, username, passwd):
-        return super(Chats, self).__init__(host, "/2011-12-03/conversations", username, passwd)
+        return super(Chats, self).__init__(host, "/conversations", username, passwd)
 
     def listDay(self, year, month, day, to = None, format = 'json'):
         dt = datetime(year, month, day)
