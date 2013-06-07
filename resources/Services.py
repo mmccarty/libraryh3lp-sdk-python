@@ -11,5 +11,8 @@ class Services (Resource):
     def showService(self, uuid):
         return self.jsonRequest('GET', url = '/%s' % uuid)
 
+    def saveService(self, uuid, data = {}):
+        return self.jsonRequest('PUT', url = '/%s' % uuid, data = data)
+
     def deleteService(self, uuid):
         return self.jsonRequest('DELETE', url = '/%s' % uuid)
