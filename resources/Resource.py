@@ -25,7 +25,7 @@ class Resource (object):
                                                timeout = self.timeout,
                                                headers = {'content-type' : 'application/json'},
                                                verify  = self.ssl_verify)
-                                               
+
         return (response.json() if json_response else response.text, 200) if response.status_code == 200 else \
                (response, response.status_code)
 
