@@ -11,6 +11,9 @@ class ServiceLevels (Resource):
     def showServiceLevel(self, service_uuid, level):
         return self.jsonRequest('GET', url = '/%s/levels/%s' % (service_uuid, level))
 
+    def createServiceLevel(self, service_uuid, data = {}):
+        return self.jsonRequest('POST', url = '/%s/levels' % service_uuid, data = data)
+
     def saveServiceLevel(self, service_uuid, level, data = {}):
         return self.jsonRequest('PUT', url = '/%s/levels/%s' % (service_uuid, level), data = data)
 
