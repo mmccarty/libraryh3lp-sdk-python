@@ -41,3 +41,20 @@ class Resource (object):
                                            timeout = self.timeout,
                                            headers = {'content-type' : 'text/plain'},
                                            verify  = self.ssl_verify)
+
+    def list(self):
+        return self.jsonRequest('GET')
+
+    def read(self, uuid, folder = False):
+        return self.jsonRequest('GET',
+                                url = "/%s" % uuid,
+                                data = {'type': 'folder'} if folder else {})
+
+    def create(self, data):
+        return self.jsonRequest('POST', data = data)
+
+    def update(self, uuid, data):
+        return self.jsonRequest('PUT', url = "/%s" % uuid, data = data)
+
+    def delete(self, uuid):
+        return self.jsonRequest('DELETE', url = "/%s" % uuid)
